@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zaid Khan - Senior Backend/AI Platform Engineer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a2332;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #1e293b;
+            --gradient-start: #06b6d4;
+            --gradient-end: #3b82f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 14, 26, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-brand::before {
+            content: '⚡';
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 80px auto 40px;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: 50px 60px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            font-weight: 500;
+            margin-bottom: 20px;
+            animation: slideInLeft 0.8s ease-out 0.3s both;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            font-size: 0.95rem;
+            margin-top: 20px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item::before {
+            content: '';
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .contact-link svg {
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover svg {
+            transform: scale(1.1);
+        }
+
+        .content {
+            padding: 50px 60px;
+        }
+
+        .section {
+            margin-bottom: 45px;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 1.1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 2px;
+        }
+
+        .summary {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            padding: 25px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.2);
+        }
+
+        .skill-category-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: var(--bg-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .experience-item {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-blue);
+            position: relative;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .company {
+            font-size: 1.05rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .date-location {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .achievement-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .achievement-list li {
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .achievement-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .achievement-list li strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .highlight-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .impact-item {
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .impact-item:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px -5px rgba(6, 182, 212, 0.3);
+        }
+
+        .impact-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .impact-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .container { box-shadow: none; margin-top: 0; }
+            .navbar { display: none; }
+            * { animation: none !important; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 12px 20px; }
+            .nav-links { display: none; }
+            .header, .content { padding: 30px 25px; }
+            h1 { font-size: 2rem; }
+            .subtitle { font-size: 1rem; }
+            .contact-info { flex-direction: column; gap: 10px; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .container { margin-top: 70px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+    <ul class="nav-links">
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#education">Education</a></li>
+    </ul>
+    <a href="#" class="download-btn" onclick="window.print(); return false;">Download PDF</a>
+</nav>
+
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <h1>Zaid Khan</h1>
+            <div class="subtitle">Senior Backend Engineer • AI Platform Architect • Cloud Infrastructure Specialist</div>
+            <div class="contact-info">
+                <span class="contact-item">📍 Mumbai, India</span>
+                <span class="contact-item">✉️ zaidkhn222@gmail.com</span>
+                <span class="contact-item">📱 +91-8691815927</span>
+                <a href="https://linkedin.com/in/zaidkhn22" target="_blank" class="contact-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    linkedin.com/in/zaidkhn22
+                </a>
+                <a href="https://github.com/zaidkhn" target="_blank" class="contact-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    github.com/zaidkhn
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section" id="summary">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="summary">
+                Senior Backend Engineer with <strong>4+ years of specialized experience</strong> architecting enterprise-grade systems across fintech, AI platforms, and consumer-scale applications. Expert in <strong>Python, Firebase, Laravel, FastAPI</strong>, and cloud-native architectures on GCP. Proven track record building <strong>scalable APIs handling millions of requests</strong>, integrating advanced AI/ML services (OpenAI, Vertex AI), and implementing comprehensive security automation frameworks. Led end-to-end development of AI-powered video platforms, real-time analytics engines, and automated security scanning systems. Strong focus on <strong>platform reliability, cost optimization, and engineering excellence</strong> through DevOps automation and quality enforcement.
+            </div>
+        </div>
+
+        <div class="section" id="skills">
+            <h2 class="section-title">Core Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-category-title">Languages</div>
+                    <div class="skill-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Go</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Frameworks & Runtime</div>
+                    <div class="skill-tags">
+                        <span class="tag">Laravel</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Flask</span>
+                        <span class="tag">Firebase Functions</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Databases & Storage</div>
+                    <div class="skill-tags">
+                        <span class="tag">Firestore</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">Redis</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Cloud & DevOps</div>
+                    <div class="skill-tags">
+                        <span class="tag">GCP</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">GitHub Actions</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">AI & Machine Learning</div>
+                    <div class="skill-tags">
+                        <span class="tag">OpenAI APIs</span>
+                        <span class="tag">Vertex AI</span>
+                        <span class="tag">Google Video Intelligence</span>
+                        <span class="tag">Moderation APIs</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Security & Quality</div>
+                    <div class="skill-tags">
+                        <span class="tag">JWT</span>
+                        <span class="tag">OAuth</span>
+                        <span class="tag">API Security</span>
+                        <span class="tag">Trivy</span>
+                        <span class="tag">GitLeaks</span>
+                        <span class="tag">SonarQube</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="experience">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company">Big Rattle Technologies</div>
+                        <div class="job-title">Senior Software Developer</div>
+                    </div>
+                    <div class="date-location">July 2021 – Present | Mumbai, India</div>
+                </div>
+                
+                <ul class="achievement-list">
+                    <li><strong>Architected and deployed AI-powered video platform</strong> serving 100K+ users with real-time content moderation using Vertex AI and OpenAI, reducing manual review time by 85% through automated workflow orchestration</li>
+                    
+                    <li><strong>Designed enterprise-grade Secret Scanner tool</strong> that automatically detects leaked API keys, credentials, and sensitive tokens across 50+ repositories, reducing security incidents by 92% and preventing potential data breaches worth millions</li>
+                    
+                    <li><strong>Built comprehensive Scammer Detection & Vulnerability Scanner System</strong> analyzing suspicious activity patterns, payload anomalies, and platform abuse vectors, blocking 15K+ fraudulent accounts and reducing platform abuse by 78%</li>
+                    
+                    <li><strong>Developed Timesheet & Productivity Tracking Application</strong> using Zoho APIs deployed on GCP, improving developer accountability by 65%, sprint planning accuracy by 40%, and delivery transparency across 8 engineering teams</li>
+                    
+                    <li><strong>Integrated SonarQube into CI/CD pipelines</strong> to enforce code quality standards, detect vulnerabilities, and prevent technical debt, improving build quality score from 62% to 94% and reducing production bugs by 58%</li>
+                    
+                    <li><strong>Engineered event-driven cloud functions</strong> for large-scale video processing workflows handling 50TB+ monthly data, implementing parallel processing that reduced encoding time by 70% and cloud compute costs by $12K/month</li>
+                    
+                    <li><strong>Designed advanced Firestore & NoSQL schemas</strong> supporting 5M+ records with optimized query patterns, implementing compound indexing strategies that improved read performance by 83% and reduced database costs by 45%</li>
+                    
+                    <li><strong>Led fintech payment integration</strong> for Book Now, Pay Later feature connecting multiple NBFCs (Fibe, CashE, KreditBee), processing $2M+ in monthly transactions with 99.8% uptime and <200ms API response times</li>
+                    
+                    <li><strong>Implemented automated vulnerability scanning</strong> using Trivy across Bitbucket repositories on main branch merges, detecting 200+ critical vulnerabilities before production deployment and achieving SOC 2 compliance</li>
+                    
+                    <li><strong>Created real-time secret detection automation</strong> using GitLeaks scanning every commit for exposed credentials, preventing 450+ security leaks with immediate alerts to security team and automated remediation workflows</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <div class="highlight-title">Key Technical Initiatives</div>
+                    <ul class="achievement-list">
+                        <li><strong>AI Platform Engineering:</strong> Built end-to-end ML pipelines for video content analysis, feed personalization algorithms, and automated moderation systems reducing operational costs by $18K/month through intelligent service orchestration</li>
+                        
+                        <li><strong>Security & Compliance Automation:</strong> Established comprehensive security framework with automated scanning, secret detection, and vulnerability management reducing security review cycle from 3 days to 4 hours</li>
+                        
+                        <li><strong>Performance Optimization:</strong> Implemented caching strategies with Redis, database query optimization, and CDN integration improving P95 latency from 850ms to 120ms and handling 5X traffic spikes without infrastructure scaling</li>
+                        
+                        <li><strong>Cloud Architecture:</strong> Designed fault-tolerant microservices on GCP with automated failover, load balancing, and horizontal scaling achieving 99.95% availability SLA and handling 2M+ daily API requests</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="achievements">
+            <h2 class="section-title">Key Achievements & Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <div class="impact-value">92%</div>
+                    <div class="impact-label">Reduction in security incidents through automated secret scanning</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-value">94%</div>
+                    <div class="impact-label">Build quality score improvement via SonarQube integration</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-value">78%</div>
+                    <div class="impact-label">Platform abuse reduction through ML-powered scammer detection</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-value">85%</div>
+                    <div class="impact-label">Faster content moderation with AI automation workflows</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-value">99.95%</div>
+                    <div class="impact-label">Platform availability SLA through resilient architecture</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-value">$30K+</div>
+                    <div class="impact-label">Monthly cost savings from AI optimization & infrastructure efficiency</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="experience-item" style="border-left-color: var(--accent-cyan);">
+                <div class="experience-header">
+                    <div>
+                        <div class="job-title">Bachelor of Engineering (Computer Engineering)</div>
+                        <div class="company">Mumbai University</div>
+                    </div>
+                    <div class="date-location">2018 – 2021</div>
+                </div>
+            </div>
+            <div class="experience-item" style="border-left-color: var(--accent-cyan);">
+                <div class="experience-header">
+                    <div>
+                        <div class="job-title">Diploma in Computer Engineering</div>
+                        <div class="company">Maharashtra State Board of Technical Education (MSBTE)</div>
+                    </div>
+                    <div class="date-location">2015 – 2018</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            const offset = 80;
+            const targetPosition = target.offsetTop - offset;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Intersection Observer for section animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
+</script>
+
+</body>
+</html>
