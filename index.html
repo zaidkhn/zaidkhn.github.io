@@ -2,30 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
-    <!-- Essential Meta Tags -->
-    <meta name="description" content="Senior Backend Engineer with 4+ years experience architecting scalable systems and AI-powered platforms handling millions of requests.">
-    <meta name="keywords" content="Backend Engineer, Python, FastAPI, Firebase, Cloud Architecture">
-    <meta name="author" content="Zaid Khan">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Zaid Khan - Senior Backend Engineer">
-    <meta property="og:description" content="Architecting scalable systems and AI-powered platforms with 4+ years experience.">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Zaid Khan - Senior Backend Engineer">
-    <meta name="twitter:description" content="Senior Backend Engineer with 4+ years experience.">
-    
-    <!-- Viewport for mobile -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#0a0a0f">
-    
     <title>Zaid Khan - Senior Backend Engineer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Essential Meta Tags -->
+    <meta name="description" content="Senior Backend Engineer with 4+ years experience architecting scalable systems and AI-powered platforms handling millions of requests with 99.95% uptime.">
+    <meta name="keywords" content="Backend Engineer, Python Developer, FastAPI, Firebase, Cloud Architecture, AI Platforms, Scalable Systems, Software Engineer, API Development, Microservices">
+    <meta name="author" content="Zaid Khan">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zaidkhan.dev/">
+    <meta property="og:title" content="Zaid Khan - Senior Backend Engineer">
+    <meta property="og:description" content="Senior Backend Engineer with 4+ years experience architecting scalable systems and AI-powered platforms handling millions of requests with 99.95% uptime.">
+    <meta property="og:image" content="https://zaidkhan.dev/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Zaid Khan - Senior Backend Engineer Portfolio">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://zaidkhan.dev/">
+    <meta property="twitter:title" content="Zaid Khan - Senior Backend Engineer">
+    <meta property="twitter:description" content="Senior Backend Engineer with 4+ years experience architecting scalable systems and AI-powered platforms.">
+    <meta property="twitter:image" content="https://zaidkhan.dev/images/twitter-image.jpg">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    
+    <!-- Fonts and Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -262,6 +272,40 @@
         .cta-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.6);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn span {
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
         }
 
         /* Main container */
@@ -512,6 +556,7 @@
         section {
             margin-bottom: 120px;
             position: relative;
+            scroll-margin-top: 100px;
         }
 
         .section-header {
@@ -959,6 +1004,12 @@
             border-top: 1px solid var(--border-color);
         }
 
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .hero {
@@ -990,20 +1041,219 @@
         }
 
         @media (max-width: 768px) {
-            nav { padding: 15px 25px; }
-            .nav-menu { display: none; }
-            h1 { font-size: 2.8rem; }
-            h2 { font-size: 2.2rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .container { margin-top: 100px; }
-            .skills-grid, .edu-cards { grid-template-columns: 1fr; }
-            .exp-header { flex-direction: column; align-items: flex-start; }
-            .section-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .experience-item { margin-left: 60px; padding: 30px; }
-            .experience-item::before { left: -60px; }
-            .experience-timeline::before { left: 20px; }
-            .contact-links { flex-direction: column; align-items: center; }
-            .contact-link { width: 100%; max-width: 300px; justify-content: center; }
+            nav {
+                padding: 15px 25px;
+                height: 70px;
+                background: rgba(17, 17, 31, 0.98);
+                backdrop-filter: blur(20px);
+            }
+            
+            nav.scrolled {
+                padding: 12px 25px;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--bg-card);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+                border-top: 1px solid var(--border-color);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 999;
+                gap: 0;
+            }
+            
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-menu a {
+                display: block;
+                padding: 15px;
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            
+            .nav-menu a:last-child {
+                border-bottom: none;
+            }
+            
+            .cta-btn {
+                position: absolute;
+                right: 70px;
+                padding: 10px 20px;
+                font-size: 0.8rem;
+                z-index: 1001;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                margin: 100px auto 60px !important;
+                padding: 0 15px;
+            }
+            
+            .hero {
+                margin-bottom: 60px;
+            }
+            
+            .skills-grid, .edu-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .exp-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .experience-item {
+                margin-left: 60px;
+                padding: 30px;
+            }
+            
+            .experience-item::before {
+                left: -60px;
+            }
+            
+            .experience-timeline::before {
+                left: 20px;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-link {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .summary-box {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin-top: 90px !important;
+            }
+            
+            nav {
+                padding: 12px 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .cta-btn {
+                right: 60px;
+                padding: 8px 15px;
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-card {
+                height: 320px;
+                padding: 20px;
+            }
+            
+            .card-icon {
+                font-size: 3rem;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .card-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .section-header {
+                margin-bottom: 40px;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 30px;
+            }
+            
+            .stat-item {
+                width: 100%;
+                max-width: 250px;
+                margin: 0 auto;
+            }
+            
+            .experience-item {
+                margin-left: 50px;
+                padding: 25px;
+            }
+            
+            .experience-item::before {
+                left: -50px;
+                width: 20px;
+                height: 20px;
+            }
+            
+            .exp-highlights {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .highlight-item {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -1023,16 +1273,23 @@
         <div class="logo-dot"></div>
         ZAID KHAN
     </div>
-    <ul class="nav-menu">
+    
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <ul class="nav-menu" id="navMenu">
         <li><a href="#summary" class="active">Summary</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#achievements">Impact</a></li>
         <li><a href="#education">Education</a></li>
     </ul>
-    <button class="cta-btn">
+    <button class="cta-btn" id="downloadBtn">
         <i class="fas fa-download"></i>
-        Download Resume
+        Resume
     </button>
 </nav>
 
@@ -1359,6 +1616,49 @@
 </footer>
 
 <script>
+    // Mobile menu functionality
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    // Toggle mobile menu
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Close mobile menu when clicking a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuBtn.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && navMenu.classList.contains('active')) {
+            mobileMenuBtn.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Resume download button
+    downloadBtn.addEventListener('click', () => {
+        // In a real implementation, this would download a PDF
+        window.location.href = "zaid_resume.pdf";
+    });
+
     // Navbar scroll effect
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
@@ -1383,6 +1683,13 @@
                 link.classList.add('active');
             }
         });
+
+        // Close mobile menu on scroll
+        if (navMenu.classList.contains('active')) {
+            mobileMenuBtn.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
 
     // Smooth scroll for nav links
@@ -1390,14 +1697,10 @@
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const target = document.querySelector(link.getAttribute('href'));
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         });
-    });
-
-    // Resume download button
-    document.querySelector('.cta-btn').addEventListener('click', () => {
-        // In a real implementation, this would download a PDF
-            window.location.href = "zaid_resume.pdf";
     });
 
     // Animate elements on scroll
@@ -1421,6 +1724,18 @@
         card.style.transform = 'translateY(20px)';
         card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         observer.observe(card);
+    });
+
+    // Prevent default for download button to avoid page jump
+    downloadBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Simulate download
+        const link = document.createElement('a');
+        link.href = 'zaid_resume.pdf';
+        link.download = 'Zaid_Khan_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     });
 </script>
 
