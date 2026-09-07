@@ -6,7 +6,7 @@
 
 <title>Zaid Khan — Senior Backend Engineer & AI Architect</title>
 <meta name="description" content="Zaid Khan builds scalable backend systems, AI integrations, data pipelines and cloud infrastructure for production products.">
-<meta name="theme-color" content="#0a1e33">
+<meta name="theme-color" content="#071321">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Zaid Khan — Senior Backend Engineer & AI Architect">
@@ -20,20 +20,18 @@
 
 <style>
 :root{
-  --ink:#0a1e33;
-  --ink-2:#0f2740;
-  --ink-3:#15304d;
-  --rule:#28496a;
-  --grid-minor:rgba(167,199,222,.055);
-  --grid-major:rgba(167,199,222,.09);
-  --paper:#eaf1f6;
-  --muted:#84a0b8;
-  --faint:#4f6a83;
-  --brass:#cf9a4c;
-  --brass-2:#e8b568;
-  --signal:#5fbfa0;
-  --max:1180px;
-  --ease:cubic-bezier(.16,.8,.24,1);
+  --ink: #071321;
+  --ink-2: #0d2136;
+  --ink-3: #132f4c;
+  --rule: #1e3a59;
+  --paper: #eaf1f6;
+  --muted: #84a0b8;
+  --faint: #4f6a83;
+  --brass: #cf9a4c;
+  --brass-2: #e8b568;
+  --signal: #5fbfa0;
+  --max: 1180px;
+  --ease: cubic-bezier(.16,.8,.24,1);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -45,20 +43,18 @@ body{
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
+/* Improved Background: Clean Dot Matrix */
 body::before{
   content:"";
   position:fixed; inset:0; z-index:-2; pointer-events:none;
-  background-image:
-    linear-gradient(var(--grid-minor) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px),
-    linear-gradient(var(--grid-major) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
-  background-size:28px 28px,28px 28px,140px 140px,140px 140px;
+  background-image: radial-gradient(rgba(167,199,222,.08) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
+/* Improved Background: Subtle Glow */
 body::after{
   content:"";
   position:fixed; inset:0; z-index:-1; pointer-events:none;
-  background:radial-gradient(ellipse 900px 560px at 88% -8%, rgba(207,154,76,.10), transparent 60%);
+  background:radial-gradient(ellipse 800px 800px at 80% -10%, rgba(207,154,76,.08), transparent 70%);
 }
 a{color:inherit;text-decoration:none;}
 button{font:inherit;background:none;border:0;color:inherit;}
@@ -98,70 +94,79 @@ h1,h2,h3{font-family:"Arvo",Georgia,serif;font-weight:700;letter-spacing:-.01em;
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.45;}}
 
 /* ---------- hero ---------- */
+/* Fixed Spacing to fit within one screen */
 .hero{
-  padding:76px 0 92px;
+  padding: 40px 0;
+  min-height: calc(100vh - 78px);
   display:grid;
-  grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);
-  gap:64px;
-  align-items:start;
+  grid-template-columns: minmax(0, 1.2fr) 320px;
+  gap: 50px;
+  align-items: center;
 }
 .name{
-  font-size:clamp(2.9rem,6.6vw,4.6rem);
-  line-height:1.02;
+  font-size:clamp(2.5rem,5.5vw,4.2rem);
+  line-height:1.05;
   color:var(--paper);
   opacity:0; animation:riseIn .7s var(--ease) forwards;
 }
 .role{
-  margin-top:14px;
+  margin-top:10px;
   font-size:19px;
   color:var(--brass-2);
   font-weight:500;
   opacity:0; animation:riseIn .7s var(--ease) .12s forwards;
 }
 .draw-rule{
-  margin-top:24px; height:1px; width:0; background:var(--rule);
+  margin-top:20px; height:1px; width:0; background:var(--rule);
   animation:drawLine .9s var(--ease) .35s forwards;
 }
 .lede{
-  margin-top:24px; max-width:560px; color:var(--muted); font-size:16px;
+  margin-top:20px; max-width:560px; color:var(--muted); font-size:16px;
   opacity:0; animation:riseIn .7s var(--ease) .24s forwards;
 }
 .cta-row{
-  display:flex; gap:12px; flex-wrap:wrap; margin-top:30px;
+  display:flex; gap:12px; flex-wrap:wrap; margin-top:28px;
   opacity:0; animation:riseIn .7s var(--ease) .34s forwards;
 }
 .btn{
   display:inline-flex; align-items:center;
   padding:12px 20px; font-size:14px; font-weight:600;
   border:1.5px solid var(--rule);
+  transition: all 0.2s ease;
 }
 .btn-primary{background:var(--brass);border-color:var(--brass);color:#101a26;}
-.btn-primary:hover{background:var(--brass-2);border-color:var(--brass-2);}
+.btn-primary:hover{background:var(--brass-2);border-color:var(--brass-2); transform: translateY(-2px);}
 .btn-outline{color:var(--paper);}
-.btn-outline:hover{border-color:var(--brass);color:var(--brass-2);}
+.btn-outline:hover{border-color:var(--brass);color:var(--brass-2); transform: translateY(-2px);}
 
+.hero-side {
+  opacity:0; animation:riseIn .7s var(--ease) .46s forwards;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Reduced gap between photo and spec-plate */
+}
 .spec-plate{
   border:1px solid var(--rule); background:rgba(15,39,64,.5);
-  opacity:0; animation:riseIn .7s var(--ease) .46s forwards;
 }
 .spec-row{
-  display:grid; grid-template-columns:96px 1fr; gap:14px;
-  padding:14px 18px; border-bottom:1px solid var(--rule);
+  display:grid; grid-template-columns:85px 1fr; gap:10px;
+  padding:12px 16px; border-bottom:1px solid var(--rule);
 }
 .spec-row:last-child{border-bottom:0;}
 .spec-row dt{font:12px "JetBrains Mono",monospace;color:var(--faint);letter-spacing:.03em;}
-.spec-row dd{font-size:14px;color:var(--paper);}
+.spec-row dd{font-size:13.5px;color:var(--paper);}
 
 @keyframes riseIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 @keyframes drawLine{from{width:0;}to{width:120px;}}
 
-.photo-frame{position:relative; width:100%;}
-.photo-plate{position:relative; border:1px solid var(--rule); padding:8px; background:rgba(15,39,64,.4);}
+/* Optimized Image Frame */
+.photo-frame{position:relative; width:100%; max-width: 260px; margin: 0 auto;}
+.photo-plate{position:relative; border:1px solid var(--rule); padding:6px; background:rgba(15,39,64,.4);}
 .photo-plate::before,.photo-plate::after{content:"";position:absolute;width:16px;height:16px;pointer-events:none;}
 .photo-plate::before{top:-1px;left:-1px;border-top:2px solid var(--brass);border-left:2px solid var(--brass);}
 .photo-plate::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--brass);border-right:2px solid var(--brass);}
-.photo{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;filter:saturate(.92) contrast(1.02);}
-.photo-caption{margin-top:12px;font-size:13px;color:var(--faint);}
+.photo{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;filter:saturate(.92) contrast(1.02); display: block;}
+.photo-caption{margin-top:8px;font-size:12.5px;color:var(--faint); text-align: center;}
 
 .rule{border-top:1px solid var(--rule);}
 
@@ -172,55 +177,73 @@ h1,h2,h3{font-family:"Arvo",Georgia,serif;font-weight:700;letter-spacing:-.01em;
 .dim::after{right:0;}
 
 /* ---------- sections ---------- */
-.section{padding:80px 0;}
-.section h2{font-size:clamp(1.7rem,3.2vw,2.3rem);color:var(--paper);max-width:640px;}
-.section-lede{margin-top:14px;max-width:600px;color:var(--muted);font-size:15.5px;}
+.section{padding:70px 0;}
+.section h2{font-size:clamp(1.7rem,3.2vw,2.1rem);color:var(--paper);max-width:640px;}
+.section-lede{margin-top:12px;max-width:600px;color:var(--muted);font-size:15.5px;}
 
 /* about */
-.about-copy{margin-top:30px;max-width:640px;}
+.about-copy{margin-top:24px;max-width:640px;}
 .about-copy p{color:var(--muted);font-size:15.5px;margin-bottom:16px;}
 .about-copy p:last-child{margin-bottom:0;}
 .about-copy strong{color:var(--paper);font-weight:600;}
 
 /* datasheet */
-.datasheet{margin-top:34px;}
+.datasheet{margin-top:30px;}
 .ds-row{
-  display:grid; grid-template-columns:170px 1fr; gap:22px;
-  padding:16px 0; border-bottom:1px solid var(--rule);
+  display:grid; grid-template-columns:140px 1fr; gap:20px;
+  padding:14px 0; border-bottom:1px solid var(--rule);
   align-items:baseline;
 }
 .ds-key{font-size:14.5px;font-weight:600;color:var(--paper);}
-.ds-val{display:flex;flex-wrap:wrap;gap:9px;}
+.ds-val{display:flex;flex-wrap:wrap;gap:8px;}
 .chip{
-  font:12.5px "JetBrains Mono",monospace; color:var(--muted);
-  border:1px solid var(--rule); padding:5px 10px;
-  transition:border-color .2s var(--ease), color .2s var(--ease);
+  font:12px "JetBrains Mono",monospace; color:var(--muted);
+  border:1px solid var(--rule); padding:4px 10px;
+  transition:border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease);
 }
-.chip:hover{border-color:var(--brass);color:var(--brass-2);}
+.chip:hover{border-color:var(--brass);color:var(--brass-2); background: rgba(207,154,76,.05);}
 
-/* work */
-.project-list{margin-top:34px;}
-.project{border-bottom:1px solid var(--rule);}
-.project-trigger{
-  width:100%; display:grid; grid-template-columns:1fr auto 28px;
-  align-items:center; gap:18px; padding:22px 0; cursor:pointer; text-align:left;
+/* work / projects grid */
+.project-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 34px;
 }
-.project-title{font-family:"Arvo",serif;font-size:17px;color:var(--paper);}
-.project-tags{display:none;}
-.project-toggle{
-  width:26px;height:26px;display:grid;place-items:center;
-  border:1px solid var(--rule); color:var(--brass-2); font-size:15px;
-  transition:transform .3s var(--ease), border-color .2s var(--ease);
+.project-card{
+  border: 1px solid var(--rule);
+  background: rgba(15,39,64,.3);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
 }
-.project.open .project-toggle{transform:rotate(45deg);border-color:var(--brass);}
-.project-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease);}
-.project-panel-inner{overflow:hidden;}
-.project-panel p{color:var(--muted);font-size:14.5px;max-width:680px;padding-bottom:0;}
-.project.open .project-panel p{padding-bottom:24px;}
-.project-stack{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.project-card:hover{
+  transform: translateY(-5px);
+  border-color: var(--brass);
+}
+.project-card h3{
+  font-family: "Arvo", serif;
+  font-size: 17px;
+  color: var(--paper);
+  margin-bottom: 14px;
+}
+.project-card p{
+  color: var(--muted);
+  font-size: 14.5px;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+.project-stack{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.project-stack .chip { font-size: 11px; padding: 3px 8px; }
 
 /* experience */
-.experience{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:40px;}
+.experience{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px;}
 .panel-title{font-family:"Arvo",serif;font-size:16px;color:var(--brass-2);margin-bottom:24px;}
 .rail{border-left:1px solid var(--rule);padding-left:26px;}
 .rail-block{position:relative;padding-bottom:32px;}
@@ -236,19 +259,19 @@ h1,h2,h3{font-family:"Arvo",Georgia,serif;font-weight:700;letter-spacing:-.01em;
 
 /* contact */
 .contact-inner{max-width:640px;}
-.contact h2{font-size:clamp(2rem,4.4vw,3rem);line-height:1.08;}
-.contact-copy{color:var(--muted);margin-top:16px;max-width:520px;}
-.contact .btn{margin-top:26px;}
-.title-block{margin-top:52px;border:1px solid var(--rule);}
+.contact h2{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1;}
+.contact-copy{color:var(--muted);margin-top:14px;max-width:520px;}
+.contact .btn{margin-top:24px;}
+.title-block{margin-top:40px;border:1px solid var(--rule);}
 .tb-row{
-  display:grid; grid-template-columns:130px 1fr; gap:16px;
-  padding:14px 18px; border-bottom:1px solid var(--rule);
+  display:grid; grid-template-columns:110px 1fr; gap:16px;
+  padding:12px 16px; border-bottom:1px solid var(--rule);
   font-size:14px;
 }
 .tb-row:last-child{border-bottom:0;}
 .tb-key{font:11.5px "JetBrains Mono",monospace;color:var(--faint);letter-spacing:.03em;align-self:center;}
 .tb-val{color:var(--paper);}
-.tb-val a{border-bottom:1px solid var(--rule);}
+.tb-val a{border-bottom:1px solid var(--rule); transition: all 0.2s ease;}
 .tb-val a:hover{color:var(--brass-2);border-color:var(--brass-2);}
 
 /* footer */
@@ -257,17 +280,19 @@ h1,h2,h3{font-family:"Arvo",Georgia,serif;font-weight:700;letter-spacing:-.01em;
   display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
 }
 .footer small{color:var(--faint);font:12px "JetBrains Mono",monospace;}
-.back-top{font-size:13px;color:var(--muted);border-bottom:1px solid var(--rule);}
+.back-top{font-size:13px;color:var(--muted);border-bottom:1px solid var(--rule); transition: all 0.2s ease;}
 .back-top:hover{color:var(--brass-2);border-color:var(--brass-2);}
 
 @media (prefers-reduced-motion: reduce){
-  .name,.role,.lede,.cta-row,.spec-plate,.draw-rule,.status-dot{animation:none !important;opacity:1 !important;width:auto !important;}
+  .name,.role,.lede,.cta-row,.spec-plate,.draw-rule,.status-dot,.hero-side{animation:none !important;opacity:1 !important;width:auto !important;}
 }
 
 @media (max-width:960px){
   .nav{display:none;}
-  .hero{grid-template-columns:1fr;gap:44px;}
-  .photo-frame{max-width:360px;}
+  .hero{grid-template-columns:1fr; gap:32px; min-height: auto; padding: 60px 0;}
+  .hero-side{flex-direction: row; align-items: center;}
+  .photo-frame{max-width: 220px; margin: 0;}
+  .spec-plate{flex-grow: 1;}
   .experience{grid-template-columns:1fr;gap:46px;}
   .rev-stamp{display:none;}
 }
@@ -275,10 +300,11 @@ h1,h2,h3{font-family:"Arvo",Georgia,serif;font-weight:700;letter-spacing:-.01em;
   .wrap{width:min(calc(100% - 28px),var(--max));}
   .top{height:66px;}
   .status{display:none;}
-  .hero{padding:52px 0 64px;}
-  .section{padding:60px 0;}
-  .ds-row{grid-template-columns:1fr;gap:10px;}
-  .project-trigger{grid-template-columns:1fr 26px;}
+  .hero-side{flex-direction: column; align-items: stretch;}
+  .photo-frame{margin: 0 auto;}
+  .section{padding:50px 0;}
+  .ds-row{grid-template-columns:1fr;gap:8px;}
+  .project-grid{grid-template-columns: 1fr;}
   .experience{grid-template-columns:1fr;}
   .tb-row{grid-template-columns:1fr;gap:4px;}
 }
@@ -326,7 +352,7 @@ h1,h2,h3{font-family:"Arvo",Georgia,serif;font-weight:700;letter-spacing:-.01em;
       <div class="photo-plate">
         <img class="photo" src="/static/image.png" alt="Portrait of Zaid Khan">
       </div>
-      <p class="photo-caption">Zaid Khan, Mumbai, Maharashtra</p>
+      <p class="photo-caption">Zaid Khan, Mumbai</p>
     </div>
 
     <dl class="spec-plate">
@@ -385,62 +411,37 @@ h1,h2,h3{font-family:"Arvo",Georgia,serif;font-weight:700;letter-spacing:-.01em;
 
 <section id="work" class="section">
   <h2>Selected systems I've shipped</h2>
-  <p class="section-lede">A few production problems worth talking through. Open a row for the engineering context.</p>
+  <p class="section-lede">A few production problems worth talking through and the stacks behind them.</p>
 
-  <div class="project-list">
-    <article class="project">
-      <button class="project-trigger" type="button" aria-expanded="false">
-        <span class="project-title">Music industry data &amp; analytics</span>
-        <span class="project-toggle" aria-hidden="true">+</span>
-      </button>
-      <div class="project-panel"><div class="project-panel-inner">
-        <div class="project-stack"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">GCP</span></div>
-        <p>A high-performance ingestion and analytics backend for YouTube data, with artist and regional-language ranking logic, deployed on Cloud Run with CloudSQL inside a private VPC.</p>
-      </div></div>
+  <div class="project-grid">
+    <article class="project-card">
+      <h3 class="project-title">Music industry data &amp; analytics</h3>
+      <div class="project-stack"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">GCP</span></div>
+      <p>A high-performance ingestion and analytics backend for YouTube data, with artist and regional-language ranking logic, deployed on Cloud Run with CloudSQL inside a private VPC.</p>
     </article>
 
-    <article class="project">
-      <button class="project-trigger" type="button" aria-expanded="false">
-        <span class="project-title">Fureelz — AI video platform</span>
-        <span class="project-toggle" aria-hidden="true">+</span>
-      </button>
-      <div class="project-panel"><div class="project-panel-inner">
-        <div class="project-stack"><span class="chip">OpenAI</span><span class="chip">Vertex AI</span><span class="chip">Firebase</span></div>
-        <p>An end-to-end social video platform combining OpenAI, Google Video Intelligence and Vertex AI, backed by Firebase and event-driven processing across GCP.</p>
-      </div></div>
+    <article class="project-card">
+      <h3 class="project-title">Fureelz — AI video platform</h3>
+      <div class="project-stack"><span class="chip">OpenAI</span><span class="chip">Vertex AI</span><span class="chip">Firebase</span></div>
+      <p>An end-to-end social video platform combining OpenAI, Google Video Intelligence and Vertex AI, backed by Firebase and event-driven processing across GCP.</p>
     </article>
 
-    <article class="project">
-      <button class="project-trigger" type="button" aria-expanded="false">
-        <span class="project-title">Fintech payment solutions</span>
-        <span class="project-toggle" aria-hidden="true">+</span>
-      </button>
-      <div class="project-panel"><div class="project-panel-inner">
-        <div class="project-stack"><span class="chip">Razorpay</span><span class="chip">NBFC lending</span><span class="chip">Insurance</span></div>
-        <p>A Book Now, Pay Later workflow connecting Fibe, CashE, KreditBee, ICICI Lombard and Razorpay across financing, insurance and payment operations.</p>
-      </div></div>
+    <article class="project-card">
+      <h3 class="project-title">Fintech payment solutions</h3>
+      <div class="project-stack"><span class="chip">Razorpay</span><span class="chip">NBFC lending</span><span class="chip">Insurance</span></div>
+      <p>A Book Now, Pay Later workflow connecting Fibe, CashE, KreditBee, ICICI Lombard and Razorpay across financing, insurance and payment operations.</p>
     </article>
 
-    <article class="project">
-      <button class="project-trigger" type="button" aria-expanded="false">
-        <span class="project-title">Financial data &amp; analytics</span>
-        <span class="project-toggle" aria-hidden="true">+</span>
-      </button>
-      <div class="project-panel"><div class="project-panel-inner">
-        <div class="project-stack"><span class="chip">NSE data</span><span class="chip">FMP</span><span class="chip">OpenBB</span></div>
-        <p>Automated NSE data ingestion, a complex query builder, reusable BRT AI utilities, and synchronisation between FMP market data and OpenBB.</p>
-      </div></div>
+    <article class="project-card">
+      <h3 class="project-title">Financial data &amp; analytics</h3>
+      <div class="project-stack"><span class="chip">NSE data</span><span class="chip">FMP</span><span class="chip">OpenBB</span></div>
+      <p>Automated NSE data ingestion, a complex query builder, reusable BRT AI utilities, and synchronisation between FMP market data and OpenBB.</p>
     </article>
 
-    <article class="project">
-      <button class="project-trigger" type="button" aria-expanded="false">
-        <span class="project-title">DevOps &amp; security automation</span>
-        <span class="project-toggle" aria-hidden="true">+</span>
-      </button>
-      <div class="project-panel"><div class="project-panel-inner">
-        <div class="project-stack"><span class="chip">Trivy</span><span class="chip">GitLeaks</span><span class="chip">Bitbucket CI/CD</span></div>
-        <p>Operational automation across Zoho and Bitbucket, with Trivy vulnerability scanning and GitLeaks secret detection built directly into the delivery pipeline.</p>
-      </div></div>
+    <article class="project-card">
+      <h3 class="project-title">DevOps &amp; security automation</h3>
+      <div class="project-stack"><span class="chip">Trivy</span><span class="chip">GitLeaks</span><span class="chip">Bitbucket CI/CD</span></div>
+      <p>Operational automation across Zoho and Bitbucket, with Trivy vulnerability scanning and GitLeaks secret detection built directly into the delivery pipeline.</p>
     </article>
   </div>
 </section>
@@ -507,14 +508,5 @@ h1,h2,h3{font-family:"Arvo",Georgia,serif;font-weight:700;letter-spacing:-.01em;
 
 </div>
 
-<script>
-document.querySelectorAll(".project-trigger").forEach(trigger => {
-  trigger.addEventListener("click", () => {
-    const card = trigger.closest(".project");
-    const isOpen = card.classList.toggle("open");
-    trigger.setAttribute("aria-expanded", String(isOpen));
-  });
-});
-</script>
 </body>
 </html>
