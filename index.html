@@ -29,10 +29,10 @@
     .nav-links a{transition:color .25s}
     .nav-links a:hover{color:var(--blue)}
     .nav-cta{padding:11px 17px;border-radius:100px;background:var(--blue);color:#101020;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:transform .25s,background .25s}
-    .nav-cta:hover{background:var(--mint);transform:translateY(-2px)}
+    .nav-cta:hover{background:var(--mint);color:#101020;transform:translateY(-2px)}
     #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.82}.hero{position:relative;min-height:100svh;padding:clamp(140px,17vh,190px) var(--pad) 34px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;isolation:isolate}
     .hero:after{content:"";position:absolute;z-index:-1;width:min(56vw,800px);aspect-ratio:1;right:5%;top:16%;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(70,45,140,.48),rgba(33,48,94,.42) 49%,rgba(11,13,23,0) 70%);filter:blur(4px)}
-    .hero-kicker{display:flex;align-items:center;gap:12px;color:var(--blue);font-size:11px;font-weight:500;margin-bottom:27px;animation:rise .8s var(--ease) both}
+    .hero-kicker{position:relative;z-index:2;display:flex;align-items:center;gap:12px;color:var(--blue);font-size:11px;font-weight:500;margin-bottom:27px;animation:rise .8s var(--ease) both}
     .kicker-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 5px rgba(99,91,255,.12)}
     .hero h1{position:relative;z-index:3;font-size:clamp(4.1rem,12vw,11.6rem);font-weight:800;line-height:.82;letter-spacing:-.095em;text-transform:uppercase;max-width:1200px;animation:rise .95s .08s var(--ease) both}
     .hero h1 span{display:block}
@@ -45,7 +45,7 @@
     .hero-orbit:after{inset:25%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.9),rgba(99,91,255,.11) 70%);border-color:rgba(99,91,255,.16)}
     .orbit-core{position:absolute;inset:39%;border-radius:50%;background:linear-gradient(145deg,#8df0ce,#766eff 72%);box-shadow:0 0 70px rgba(99,91,255,.42),0 0 0 14px rgba(255,255,255,.06);z-index:2}
     .orbit-dot{position:absolute;z-index:3;width:13px;height:13px;border-radius:50%;background:#635bff;border:3px solid var(--bg);box-shadow:0 0 0 5px rgba(99,91,255,.12)}
-    .orbit-dot.one{top:13%;left:22%}.orbit-dot.two{right:9%;top:48%;background:#28b985}.orbit-dot.three{bottom:12%;left:35%;background:#11152b}
+    .orbit-dot.one{top:13%;left:22%}.orbit-dot.two{right:9%;top:48%;background:#28b985}.orbit-dot.three{bottom:12%;left:35%;background:var(--ink)}
     .orbit-label{position:absolute;z-index:4;padding:10px 13px;border:1px solid rgba(255,255,255,.9);border-radius:12px;background:rgba(18,21,38,.82);backdrop-filter:blur(10px);box-shadow:0 12px 35px rgba(0,0,0,.18);font:10px var(--mono);letter-spacing:.04em;color:#d9dcf4}
     .orbit-label.a{left:-5%;top:27%}.orbit-label.b{right:-6%;bottom:22%}.orbit-label.c{left:13%;bottom:3%}
     .hero-portrait:before{content:"";position:absolute;z-index:2;inset:10px;border:1px solid rgba(255,255,255,.52);border-radius:inherit;pointer-events:none}
@@ -57,7 +57,7 @@
     .button{display:inline-flex;align-items:center;gap:12px;padding:15px 19px;border:1px solid var(--line);border-radius:100px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;transition:transform .25s,background .25s,color .25s,border-color .25s}
     .button svg{width:14px;height:14px;transition:transform .25s}
     .button-dark{background:var(--blue);border-color:var(--blue);color:#101020}
-    .button-dark:hover{background:var(--blue);border-color:var(--blue);transform:translateY(-3px)}
+    .button-dark:hover{background:var(--mint);border-color:var(--mint);transform:translateY(-3px)}
     .button-dark:hover svg{transform:translateY(3px)}
     .button-light{background:var(--paper);color:var(--ink)}
     .button-light:hover{background:var(--blue-soft);border-color:var(--blue-soft);transform:translateY(-3px)}
