@@ -136,6 +136,13 @@
     .site-footer{padding:24px var(--pad) 30px;background:var(--paper);color:var(--muted);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:18px;font:9px var(--mono);letter-spacing:.1em;text-transform:uppercase}
     .footer-links{display:flex;gap:22px;flex-wrap:wrap}
     .footer-links a:hover{color:var(--blue)}
+    .scroll-scene{position:relative;isolation:isolate;overflow:hidden}
+    .scroll-scene:before{content:"";position:absolute;z-index:-1;inset:8% -8%;pointer-events:none;opacity:var(--scene-opacity,.12);background:radial-gradient(ellipse at var(--scene-x,70%) var(--scene-y,35%),var(--blue),transparent 42%),radial-gradient(ellipse at 15% 75%,var(--mint),transparent 36%);filter:blur(48px);transform:translate3d(0,var(--scene-shift,0px),0);transition:opacity .35s}
+    .scroll-scene.is-active:before{opacity:.2}
+    .scroll-progress{position:fixed;z-index:100;top:0;left:0;width:100%;height:2px;pointer-events:none;background:color-mix(in srgb,var(--blue) 12%,transparent)}
+    .scroll-progress span{display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--blue),var(--mint),var(--pink));transform:scaleX(0);transform-origin:left center;will-change:transform}
+    .scroll-scene .scene-index{position:absolute;top:clamp(20px,4vw,48px);right:clamp(18px,4vw,48px);font:9px var(--mono);letter-spacing:.15em;color:var(--muted);opacity:.65;pointer-events:none}
+    .scroll-scene .scene-index:before{content:"/ ";color:var(--mint)}
     .reveal{opacity:0;transform:translateY(32px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
     .reveal.visible{opacity:1;transform:translateY(0)}
     .delay-a{transition-delay:.08s}.delay-b{transition-delay:.16s}.delay-c{transition-delay:.24s}
@@ -202,6 +209,7 @@
   </style>
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   <nav class="site-nav" aria-label="Main navigation">
     <a class="brand" href="#top" aria-label="Zaid Khan home"><span class="brand-mark">ZK</span><span>ZAID KHAN</span></a>
     <div class="nav-links">
@@ -244,7 +252,7 @@
       </div>
     </section>
 
-    <section class="section about-section" id="about">
+    <section class="section about-section scroll-scene" id="about" data-scene="01"><span class="scene-index">01 / PROFILE</span>
       <div class="section-head reveal">
         <div class="eyebrow">01 / The approach</div>
         <h2 class="section-title">Make the complex<br>feel <em>simple.</em></h2>
@@ -265,7 +273,7 @@
       </div>
     </section>
 
-    <section class="section projects-section" id="work">
+    <section class="section projects-section scroll-scene" id="work" data-scene="02"><span class="scene-index">02 / SELECTED WORK</span>
       <div class="section-head reveal">
         <div class="eyebrow">02 / Selected work</div>
         <h2 class="section-title">Systems with<br><em>purpose.</em></h2>
@@ -303,7 +311,7 @@
       </div>
     </section>
 
-    <section class="section" id="experience">
+    <section class="section scroll-scene" id="experience" data-scene="03"><span class="scene-index">03 / EXPERIENCE</span>
       <div class="section-head reveal">
         <div class="eyebrow">03 / The path so far</div>
         <h2 class="section-title">Built through<br><em>experience.</em></h2>
@@ -334,7 +342,7 @@
       </div>
     </section>
 
-    <section class="section contact-section" id="contact">
+    <section class="section contact-section scroll-scene" id="contact" data-scene="04"><span class="scene-index">04 / CONNECT</span>
       <div class="contact-inner">
         <div class="eyebrow reveal">04 / Start a conversation</div>
         <h2 class="contact-head reveal">Have a<br><span>good problem?</span></h2>
@@ -425,11 +433,52 @@
         function resize(){const w=hero.clientWidth,hh=hero.clientHeight;renderer.setSize(w,hh,false);camera.aspect=w/hh;camera.updateProjectionMatrix();}
         window.addEventListener('resize',resize,{passive:true});
         let frame=0,paused=false;
-        function animate(){if(paused)return;stars.rotation.y+=.0007;stars.rotation.x+=.00025;stars.position.x+=(pointer.x*.35-stars.position.x)*.012;stars.position.y+=(-pointer.y*.25-stars.position.y)*.012;sculpture.rotation.y+=.0025+pointer.x*.0008;sculpture.rotation.x+=.001+pointer.y*.0005;ringA.rotation.z+=.0015;ringB.rotation.x-=.001;renderer.render(scene,camera);frame=requestAnimationFrame(animate);}
+        function animate(){if(paused)return;const progress=window.scrollY/Math.max(1,document.documentElement.scrollHeight-window.innerHeight);const scrollWave=Math.sin(progress*Math.PI*4);stars.rotation.y+=.0007+progress*.0006;stars.rotation.x+=.00025;stars.position.x+=(pointer.x*.35-stars.position.x)*.012;stars.position.y+=(-pointer.y*.25-stars.position.y)*.012;sculpture.rotation.y+=.0025+pointer.x*.0008+progress*.002;sculpture.rotation.x+=.001+pointer.y*.0005;sculpture.position.y=-.1+scrollWave*.35;sculpture.scale.setScalar(1+Math.sin(progress*Math.PI*6)*.035);ringA.rotation.z+=.0015+progress*.003;ringB.rotation.x-=.001+progress*.002;camera.position.y+=(progress*1.5-camera.position.y)*.025;renderer.render(scene,camera);frame=requestAnimationFrame(animate);}
         document.addEventListener('visibilitychange',()=>{paused=document.hidden;if(paused)cancelAnimationFrame(frame);else animate();});
         animate();
       } catch (_) { canvas.hidden=true; }
     })();
+    // Scroll-driven Three.js scene: camera depth, geometry rotations, and color accents respond to page progress.
+    const scrollBar = document.getElementById('scroll-progress-bar');
+    const scrollScenes = [...document.querySelectorAll('.scroll-scene')];
+    const scrollState = { progress: 0, target: 0, active: 0 };
+    let scrollSceneObserver = null;
+    const clamp01 = value => Math.max(0,Math.min(1,value));
+    function updateScrollTargets() {
+      const maxScroll = Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+      scrollState.target = clamp01(window.scrollY/maxScroll);
+      const center = window.innerHeight*.52;
+      let closest = Infinity;
+      scrollScenes.forEach((section,index) => {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs((rect.top+rect.height*.5)-center);
+        if(distance<closest){closest=distance;scrollState.active=index;}
+      });
+      scrollScenes.forEach((section,index)=>section.classList.toggle('is-active',index===scrollState.active));
+    }
+    window.addEventListener('scroll',updateScrollTargets,{passive:true});
+    window.addEventListener('resize',updateScrollTargets,{passive:true});
+    updateScrollTargets();
+    if(!reduceMotion) {
+      const scrollTick = () => {
+        scrollState.progress += (scrollState.target-scrollState.progress)*.09;
+        if(scrollBar) scrollBar.style.transform = 'scaleX('+scrollState.progress.toFixed(4)+')';
+        scrollScenes.forEach((section,index)=>{
+          const rect=section.getBoundingClientRect();
+          const viewportCenter=window.innerHeight*.5;
+          const sectionCenter=rect.top+rect.height*.5;
+          const normalized=Math.max(-1,Math.min(1,(sectionCenter-viewportCenter)/Math.max(window.innerHeight,1)));
+          section.style.setProperty('--scene-shift',(normalized*-22).toFixed(2)+'px');
+          section.style.setProperty('--scene-x',(50+normalized*18+index*7)+'%');
+          section.style.setProperty('--scene-y',(50-normalized*12)+'%');
+          section.style.setProperty('--scene-opacity',(0.08+(1-Math.abs(normalized))*.1).toFixed(3));
+        });
+        requestAnimationFrame(scrollTick);
+      };
+      requestAnimationFrame(scrollTick);
+    } else if(scrollBar) {
+      scrollBar.style.transform='scaleX(1)';
+    }
     const revealItems = document.querySelectorAll('.reveal');
     if (reduceMotion || !('IntersectionObserver' in window)) {
       revealItems.forEach((item) => item.classList.add('visible'));
