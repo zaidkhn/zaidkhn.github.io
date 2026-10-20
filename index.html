@@ -346,7 +346,7 @@
       };
       const systemScheme = window.matchMedia('(prefers-color-scheme: dark)');
       let preference = 'system';
-      try { const saved = localStorage.getItem('zk-theme'); if (['system','dark','light'].includes(saved)) preference = saved; } catch (_) {}
+      try { const saved = localStorage.getItem('zk-theme-preference'); if (['system','dark','light'].includes(saved)) preference = saved; } catch (_) {}
       function setTheme(next, save = true) {
         preference = next;
         const resolved = next === 'system' ? (systemScheme.matches ? 'dark' : 'light') : next;
@@ -362,7 +362,7 @@
         const labels = {system:'Theme: system preference. Click to use dark theme',dark:'Theme: dark. Click to use light theme',light:'Theme: light. Click to follow system preference'};
         toggle.setAttribute('aria-label',labels[next]);
         toggle.setAttribute('title',labels[next]);
-        try { if(save) localStorage.setItem('zk-theme',next); } catch (_) {}
+        try { if(save) localStorage.setItem('zk-theme-preference',next); } catch (_) {}
       }
       toggle.addEventListener('click',()=>setTheme(preference==='system'?'dark':preference==='dark'?'light':'system'));
       systemScheme.addEventListener('change',()=>{if(preference==='system') setTheme('system',false);});
