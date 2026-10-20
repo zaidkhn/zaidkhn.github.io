@@ -33,13 +33,13 @@
     .nav-cta{padding:11px 17px;border-radius:100px;background:var(--blue);color:#101020;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:transform .25s,background .25s}
     .nav-cta:hover{background:var(--mint);color:#101020;transform:translateY(-2px)}
     #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.82}.hero{position:relative;min-height:100svh;padding:clamp(140px,17vh,190px) var(--pad) 34px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;isolation:isolate}
-    .hero:after{content:"";position:absolute;z-index:-1;width:min(56vw,800px);aspect-ratio:1;right:5%;top:16%;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(255,122,168,.20),rgba(115,228,255,.14) 28%,rgba(114,80,232,.35) 49%,rgba(11,13,23,0) 70%);filter:blur(4px)}
+    .hero:after{content:"";position:absolute;z-index:-1;width:min(56vw,800px);aspect-ratio:1;right:5%;top:16%;border-radius:50%;background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--pink) 20%,transparent),color-mix(in srgb,var(--cyan) 14%,transparent) 28%,color-mix(in srgb,var(--blue) 35%,transparent) 49%,transparent 70%);filter:blur(4px);pointer-events:none}
     .hero-kicker{position:relative;z-index:2;display:flex;align-items:center;gap:12px;color:var(--blue);font-size:11px;font-weight:500;margin-bottom:27px;animation:rise .8s var(--ease) both}
     .kicker-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 5px rgba(99,91,255,.12)}
-    .hero h1{position:relative;z-index:3;font-size:clamp(4.1rem,12vw,11.6rem);font-weight:800;line-height:.82;letter-spacing:-.095em;text-transform:uppercase;max-width:1200px;animation:rise .95s .08s var(--ease) both}
+    .hero h1{position:relative;z-index:3;font-size:clamp(4rem,9.1vw,10rem);font-weight:800;line-height:.84;letter-spacing:-.09em;text-transform:uppercase;max-width:100%;animation:rise .95s .08s var(--ease) both;overflow-wrap:anywhere}
     .hero h1 span{display:block}
     .hero h1 .outline{color:transparent;-webkit-text-stroke:1.5px var(--blue);font-weight:600}
-    .hero h1 .last-line{white-space:nowrap}
+    .hero h1 .last-line{white-space:normal;max-width:100%;text-wrap:balance}
     .blue-period{color:var(--blue)}
     .hero-portrait{display:none}
     .hero-orbit{position:absolute;z-index:1;right:clamp(30px,9vw,145px);top:21%;width:clamp(300px,39vw,560px);aspect-ratio:1.08;overflow:hidden;border:1px solid color-mix(in srgb,var(--blue) 35%,transparent);border-radius:24px;background:linear-gradient(135deg,color-mix(in srgb,var(--paper) 92%,transparent),color-mix(in srgb,var(--blue-soft) 50%,transparent) 58%,color-mix(in srgb,var(--paper) 94%,transparent));box-shadow:0 0 0 1px color-mix(in srgb,var(--blue) 8%,transparent),0 24px 90px rgba(80,60,160,.12);transform:perspective(1000px) rotateY(-8deg) rotateX(3deg);animation:hud-in 1s .15s var(--ease) both}
@@ -61,6 +61,8 @@
     @keyframes hud-pulse{0%,100%{opacity:.65;transform:translate(-50%,-50%) scale(.96)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}}
     @keyframes meter{from{opacity:.45}to{opacity:1}}
     @media(prefers-reduced-motion:reduce){.hud-crosshair,.hud-meter i{animation:none}}
+    .button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:14px 18px;border:1px solid var(--line);border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.01em;line-height:1;white-space:nowrap;transition:transform .25s,background .25s,border-color .25s,color .25s}
+    .button svg{width:14px;height:14px;flex:none;transition:transform .25s}
     .button-dark{background:var(--blue);border-color:var(--blue);color:#101020}
     .button-dark:hover{background:var(--mint);border-color:var(--mint);transform:translateY(-3px)}
     .button-dark:hover svg{transform:translateY(3px)}
@@ -131,9 +133,9 @@
     @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
     @keyframes portrait-in{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
     @keyframes orbit-in{from{opacity:0;transform:scale(.88) rotate(-12deg)}to{opacity:1;transform:scale(1) rotate(0)}}
-    @media(min-width:1400px){.hero h1{font-size:clamp(11rem,12vw,14rem)}}
+    @media(min-width:1400px){.hero h1{font-size:clamp(8rem,9.1vw,10rem)}}
     @media(max-width:1000px){
-      .hero h1{font-size:clamp(5rem,12vw,9rem)}
+      .hero h1{font-size:clamp(4.5rem,9.5vw,7.5rem)}
       .hero-portrait{right:5%;top:27%;width:33vw}
       .hero h1 .outline{-webkit-text-stroke-width:1px}
       .portrait-caption{right:3vw}
@@ -149,11 +151,11 @@
       .hero{min-height:880px;min-height:100svh;padding-top:150px;justify-content:flex-start}
       .hero:after{width:92vw;right:-20%;top:21%}
       .hero-kicker{font-size:9px;margin-bottom:24px}
-      .hero h1{font-size:clamp(4.2rem,15.5vw,8rem);line-height:.86;letter-spacing:-.09em}
+      .hero h1{font-size:clamp(3.8rem,13vw,6.5rem);line-height:.88;letter-spacing:-.085em}
       .hero h1 .last-line{white-space:normal}
       .hero-orbit{width:clamp(220px,56vw,350px);right:-2%;top:31%;opacity:.88;transform:none}.hud-readout{font-size:8px;padding:7px 8px}.hud-readout.top,.hud-readout.bottom{left:22px}.hud-readout.top{top:24px}.hud-readout.side{right:22px}.hud-readout.bottom{bottom:24px}.hud-frame{inset:12px}.hud-crosshair{width:110px;height:110px}
       .portrait-caption{top:auto;bottom:28%;right:7px;font-size:8px}
-      .hero-foot{margin-top:auto;padding-top:320px;align-items:flex-start;flex-direction:column;gap:20px}
+      .hero-foot{margin-top:auto;padding-top:clamp(250px,68vw,320px);align-items:flex-start;flex-direction:column;gap:20px}
       .hero-summary{max-width:500px;font-size:14px}
       .hero-side-meta{display:none}
       .scroll-note{margin-top:24px}
@@ -174,17 +176,16 @@
     @media(max-width:430px){
       .nav-links a:nth-child(3){display:none}
       .hero{min-height:850px}
-      .hero h1{font-size:15.5vw}
+      .hero h1{font-size:clamp(3.2rem,13.2vw,4.2rem)}
       .hero-orbit{top:33%;right:-4%;width:62vw}.hud-readout.side,.hud-signal{display:none}.hud-crosshair{width:88px;height:88px}.hud-readout.top{left:18px;top:18px}.hud-readout.bottom{left:18px;bottom:18px}
-      .hero-foot{padding-top:300px}
+      .hero-foot{padding-top:clamp(220px,66vw,280px)}
       .button{font-size:10px;padding:14px 15px}
       .project-row{grid-template-columns:26px minmax(0,1fr);gap:9px}
       .project-no{font-size:9px}
     }
     [data-theme="light"] .site-nav{box-shadow:0 9px 30px rgba(39,44,98,.08)}
-    [data-theme="light"] .orbit-label{border-color:var(--line);background:rgba(255,255,255,.78);color:#34344b}
     [data-theme="light"] .contact-section:after{opacity:.45}
-    [data-theme="light"] .contact-section .contact-head span{-webkit-text-stroke-color:#11152b}
+    [data-theme="light"] .contact-section .contact-head span{-webkit-text-stroke-color:var(--ink)}
     @media(prefers-reduced-motion:reduce){
       *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
       .reveal{opacity:1;transform:none}
@@ -392,7 +393,7 @@
         const count=420, positions=new Float32Array(count*3);
         for(let i=0;i<count;i++){positions[i*3]=(Math.random()-.5)*34;positions[i*3+1]=(Math.random()-.5)*21;positions[i*3+2]=(Math.random()-.5)*12;}
         const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
-        const material=new THREE.PointsMaterial({color:0x9a91ff,size:.055,transparent:true,opacity:.8,sizeAttenuation:true});
+        const material=new THREE.PointsMaterial({color:0xb49aff,size:.055,transparent:true,opacity:.8,sizeAttenuation:true});
         const stars=new THREE.Points(geometry,material);scene.add(stars);
         const pointer={x:0,y:0};
         hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();pointer.x=((e.clientX-r.left)/r.width-.5)*2;pointer.y=((e.clientY-r.top)/r.height-.5)*2;},{passive:true});
