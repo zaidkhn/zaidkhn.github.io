@@ -47,10 +47,19 @@
     .hud-frame{position:absolute;inset:20px;border:1px solid color-mix(in srgb,var(--blue) 30%,transparent)}
     .hud-corner{position:absolute;width:22px;height:22px;border-color:var(--mint);border-style:solid;filter:drop-shadow(0 0 5px color-mix(in srgb,var(--mint) 45%,transparent))}
     .hud-corner.tl{left:-1px;top:-1px;border-width:2px 0 0 2px}.hud-corner.tr{right:-1px;top:-1px;border-width:2px 2px 0 0}.hud-corner.bl{left:-1px;bottom:-1px;border-width:0 0 2px 2px}.hud-corner.br{right:-1px;bottom:-1px;border-width:0 2px 2px 0}
-    .hud-crosshair{position:absolute;left:50%;top:48%;width:150px;height:150px;transform:translate(-50%,-50%);border:1px solid color-mix(in srgb,var(--blue) 55%,transparent);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--blue) 24%,transparent),transparent 65%);animation:hud-pulse 5s ease-in-out infinite}
+    .hud-crosshair{position:absolute;left:50%;top:49%;width:clamp(150px,20vw,240px);height:clamp(190px,25vw,300px);transform:translate(-50%,-50%);border:1px solid color-mix(in srgb,var(--blue) 35%,transparent);clip-path:polygon(12% 0,88% 0,100% 10%,100% 90%,88% 100%,12% 100%,0 90%,0 10%);background:linear-gradient(145deg,color-mix(in srgb,var(--blue) 10%,transparent),transparent 55%);animation:hud-pulse 5s ease-in-out infinite}
     .hud-crosshair:before,.hud-crosshair:after{content:"";position:absolute;background:color-mix(in srgb,var(--blue) 45%,transparent)}.hud-crosshair:before{width:1px;top:0;bottom:0;left:50%}.hud-crosshair:after{height:1px;left:0;right:0;top:50%}
-    .hud-crosshair span{position:absolute;left:50%;top:50%;width:26px;height:26px;transform:translate(-50%,-50%);border:1px solid var(--mint);background:var(--blue);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);box-shadow:0 0 25px color-mix(in srgb,var(--blue) 35%,transparent)}
-    .hud-crosshair i{position:absolute;left:50%;top:50%;width:5px;height:5px;background:var(--mint);transform:translate(-50%,-50%);border-radius:50%}
+    .hud-crosshair span{display:none}
+    .hud-crosshair i{display:none}
+    .hud-portrait{position:absolute;z-index:2;left:50%;top:49%;width:clamp(116px,15vw,190px);height:clamp(158px,20vw,248px);transform:translate(-50%,-50%) rotateY(-7deg) rotateZ(-2deg);border:1px solid color-mix(in srgb,var(--mint) 65%,transparent);border-radius:12px;overflow:hidden;background:var(--paper);box-shadow:0 0 0 5px color-mix(in srgb,var(--blue) 9%,transparent),0 18px 50px rgba(0,0,0,.22);animation:portrait-float 6s ease-in-out infinite;isolation:isolate}
+    .hud-portrait:before{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--blue) 5%,transparent),transparent 42%,color-mix(in srgb,var(--bg) 86%,transparent));pointer-events:none}
+    .hud-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 28%;filter:saturate(.78) contrast(1.04);mix-blend-mode:normal}
+    .portrait-glass{position:absolute;z-index:3;inset:0;background:linear-gradient(135deg,transparent 0 43%,color-mix(in srgb,var(--cyan) 18%,transparent) 44%,transparent 48%);pointer-events:none}
+    .portrait-scan{position:absolute;z-index:4;left:0;right:0;top:0;height:2px;background:var(--mint);box-shadow:0 0 12px var(--mint);opacity:.75;animation:portrait-scan 4.5s ease-in-out infinite}
+    .portrait-index,.portrait-label{position:absolute;z-index:5;left:10px;color:var(--ink);font-size:8px;letter-spacing:.12em;text-shadow:0 1px 6px var(--bg)}
+    .portrait-index{top:10px}.portrait-label{bottom:10px;color:var(--mint);font-size:7px}
+    @keyframes portrait-float{0%,100%{margin-top:0;transform:translate(-50%,-50%) rotateY(-7deg) rotateZ(-2deg)}50%{margin-top:-7px;transform:translate(-50%,-50%) rotateY(5deg) rotateZ(1deg)}}
+    @keyframes portrait-scan{0%{top:0;opacity:0}10%,85%{opacity:.75}100%{top:100%;opacity:0}}
     .hud-readout{position:absolute;display:flex;gap:8px;align-items:center;padding:10px 12px;border:1px solid color-mix(in srgb,var(--blue) 25%,transparent);background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px);font:9px var(--mono);letter-spacing:.08em;color:var(--muted)}
     .hud-readout b{font-weight:500;color:var(--blue)}.hud-readout.top{top:38px;left:38px;flex-direction:column;align-items:flex-start;gap:5px}.hud-readout.top span{color:var(--mint);font-size:8px}
     .hud-readout.side{right:38px;top:42%;flex-direction:column;align-items:flex-start;gap:8px}.hud-readout.side small{font-size:8px;color:var(--mint)}
@@ -60,7 +69,7 @@
     @keyframes hud-in{from{opacity:0;transform:perspective(1000px) rotateY(-12deg) rotateX(6deg) translateY(12px)}to{opacity:1;transform:perspective(1000px) rotateY(-8deg) rotateX(3deg) translateY(0)}}
     @keyframes hud-pulse{0%,100%{opacity:.65;transform:translate(-50%,-50%) scale(.96)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}}
     @keyframes meter{from{opacity:.45}to{opacity:1}}
-    @media(prefers-reduced-motion:reduce){.hud-crosshair,.hud-meter i{animation:none}}
+    @media(prefers-reduced-motion:reduce){.hud-crosshair,.hud-meter i,.hud-portrait,.portrait-scan{animation:none!important}}
     .button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:14px 18px;border:1px solid var(--line);border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.01em;line-height:1;white-space:nowrap;transition:transform .25s,background .25s,border-color .25s,color .25s}
     .button svg{width:14px;height:14px;flex:none;transition:transform .25s}
     .button-dark{background:var(--blue);border-color:var(--blue);color:#101020}
@@ -153,7 +162,7 @@
       .hero-kicker{font-size:9px;margin-bottom:24px}
       .hero h1{font-size:clamp(3.8rem,13vw,6.5rem);line-height:.88;letter-spacing:-.085em}
       .hero h1 .last-line{white-space:normal}
-      .hero-orbit{width:clamp(220px,56vw,350px);right:-2%;top:31%;opacity:.88;transform:none}.hud-readout{font-size:8px;padding:7px 8px}.hud-readout.top,.hud-readout.bottom{left:22px}.hud-readout.top{top:24px}.hud-readout.side{right:22px}.hud-readout.bottom{bottom:24px}.hud-frame{inset:12px}.hud-crosshair{width:110px;height:110px}
+      .hero-orbit{width:clamp(220px,56vw,350px);right:-2%;top:31%;opacity:.88;transform:none}.hud-readout{font-size:8px;padding:7px 8px}.hud-readout.top,.hud-readout.bottom{left:22px}.hud-readout.top{top:24px}.hud-readout.side{right:22px}.hud-readout.bottom{bottom:24px}.hud-frame{inset:12px}.hud-crosshair{width:140px;height:180px}.hud-portrait{width:clamp(100px,18vw,150px);height:clamp(138px,25vw,198px)}
       .portrait-caption{top:auto;bottom:28%;right:7px;font-size:8px}
       .hero-foot{margin-top:auto;padding-top:clamp(250px,68vw,320px);align-items:flex-start;flex-direction:column;gap:20px}
       .hero-summary{max-width:500px;font-size:14px}
@@ -177,7 +186,7 @@
       .nav-links a:nth-child(3){display:none}
       .hero{min-height:850px}
       .hero h1{font-size:clamp(3.2rem,13.2vw,4.2rem)}
-      .hero-orbit{top:33%;right:-4%;width:62vw}.hud-readout.side,.hud-signal{display:none}.hud-crosshair{width:88px;height:88px}.hud-readout.top{left:18px;top:18px}.hud-readout.bottom{left:18px;bottom:18px}
+      .hero-orbit{top:33%;right:-4%;width:62vw}.hud-readout.side,.hud-signal{display:none}.hud-crosshair{width:110px;height:145px}.hud-portrait{width:clamp(88px,24vw,112px);height:clamp(120px,33vw,152px)}.hud-readout.top{left:18px;top:18px}.hud-readout.bottom{left:18px;bottom:18px}
       .hero-foot{padding-top:clamp(220px,66vw,280px)}
       .button{font-size:10px;padding:14px 15px}
       .project-row{grid-template-columns:26px minmax(0,1fr);gap:9px}
@@ -209,7 +218,14 @@
       <div class="hero-orbit" aria-hidden="true">
         <div class="hud-grid"></div>
         <div class="hud-frame"><span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span></div>
-        <div class="hud-crosshair"><span></span><i></i></div>
+        <div class="hud-crosshair" aria-hidden="true"></div>
+        <div class="hud-portrait">
+          <div class="portrait-glass"></div>
+          <img src="static/image.png" alt="Portrait of Zaid Khan" loading="eager" fetchpriority="high">
+          <span class="portrait-scan"></span>
+          <span class="portrait-index mono">ZK / 001</span>
+          <span class="portrait-label mono">ENGINEER · BUILDER</span>
+        </div>
         <div class="hud-readout top"><b>SYS / 01</b><span>CORE ONLINE</span></div>
         <div class="hud-readout side"><span class="hud-meter"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>DATA FLOW</b><small>98.7% STABLE</small></div>
         <div class="hud-readout bottom"><span class="hud-status"></span> BUILD · SHIP · SCALE</div>
@@ -390,17 +406,26 @@
         renderer.setSize(hero.clientWidth,hero.clientHeight,false);
         const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(48,hero.clientWidth/hero.clientHeight,.1,100);
         camera.position.z=24;
-        const count=420, positions=new Float32Array(count*3);
+        const count=560, positions=new Float32Array(count*3);
         for(let i=0;i<count;i++){positions[i*3]=(Math.random()-.5)*34;positions[i*3+1]=(Math.random()-.5)*21;positions[i*3+2]=(Math.random()-.5)*12;}
         const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
-        const material=new THREE.PointsMaterial({color:0xb49aff,size:.055,transparent:true,opacity:.8,sizeAttenuation:true});
+        const material=new THREE.PointsMaterial({color:0xb49aff,size:.055,transparent:true,opacity:.72,sizeAttenuation:true});
         const stars=new THREE.Points(geometry,material);scene.add(stars);
+        const sculpture=new THREE.Group();scene.add(sculpture);sculpture.position.set(7,-.1,-1);
+        const wireMat=new THREE.MeshBasicMaterial({color:0x9b8cff,wireframe:true,transparent:true,opacity:.48});
+        const shell=new THREE.Mesh(new THREE.IcosahedronGeometry(3.15,1),wireMat);sculpture.add(shell);
+        const inner=new THREE.Mesh(new THREE.TorusKnotGeometry(1.72,.012,140,8,2,5),new THREE.MeshBasicMaterial({color:0x72f1c8,transparent:true,opacity:.8}));
+        sculpture.add(inner);
+        const ringA=new THREE.Mesh(new THREE.TorusGeometry(4.1,.012,8,120),new THREE.MeshBasicMaterial({color:0x73e4ff,transparent:true,opacity:.65}));
+        ringA.rotation.set(.8,.2,.45);sculpture.add(ringA);
+        const ringB=new THREE.Mesh(new THREE.TorusGeometry(4.55,.009,8,120),new THREE.MeshBasicMaterial({color:0xff7aa8,transparent:true,opacity:.45}));
+        ringB.rotation.set(1.1,.8,-.35);sculpture.add(ringB);
         const pointer={x:0,y:0};
         hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();pointer.x=((e.clientX-r.left)/r.width-.5)*2;pointer.y=((e.clientY-r.top)/r.height-.5)*2;},{passive:true});
         function resize(){const w=hero.clientWidth,hh=hero.clientHeight;renderer.setSize(w,hh,false);camera.aspect=w/hh;camera.updateProjectionMatrix();}
         window.addEventListener('resize',resize,{passive:true});
         let frame=0,paused=false;
-        function animate(){if(paused)return;stars.rotation.y+=.0007;stars.rotation.x+=.00025;stars.position.x+=(pointer.x*.35-stars.position.x)*.012;stars.position.y+=(-pointer.y*.25-stars.position.y)*.012;renderer.render(scene,camera);frame=requestAnimationFrame(animate);}
+        function animate(){if(paused)return;stars.rotation.y+=.0007;stars.rotation.x+=.00025;stars.position.x+=(pointer.x*.35-stars.position.x)*.012;stars.position.y+=(-pointer.y*.25-stars.position.y)*.012;sculpture.rotation.y+=.0025+pointer.x*.0008;sculpture.rotation.x+=.001+pointer.y*.0005;ringA.rotation.z+=.0015;ringB.rotation.x-=.001;renderer.render(scene,camera);frame=requestAnimationFrame(animate);}
         document.addEventListener('visibilitychange',()=>{paused=document.hidden;if(paused)cancelAnimationFrame(frame);else animate();});
         animate();
       } catch (_) { canvas.hidden=true; }
