@@ -19,19 +19,19 @@
     .intro-loader:before{content:"";position:absolute;width:min(78vw,620px);aspect-ratio:1;border:1px solid color-mix(in srgb,var(--blue) 28%,transparent);border-radius:50%;box-shadow:inset 0 0 90px color-mix(in srgb,var(--blue) 7%,transparent),0 0 110px color-mix(in srgb,var(--blue) 10%,transparent);animation:loader-orbit 3s ease-in-out infinite}
     .intro-loader:after{content:"";position:absolute;width:min(52vw,390px);aspect-ratio:1;border:1px dashed color-mix(in srgb,var(--mint) 28%,transparent);border-radius:50%;animation:loader-spin 12s linear infinite}
     .intro-loader.is-done{opacity:0;visibility:hidden;pointer-events:none}
-    .loader-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;animation:loader-rise .8s var(--ease) both}
+    .loader-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;animation:loader-rise .55s cubic-bezier(.2,.8,.2,1) both}
     .loader-mark{display:grid;place-items:center;width:54px;height:54px;border:1px solid color-mix(in srgb,var(--blue) 55%,transparent);border-radius:18px;color:var(--blue);font-size:15px;font-weight:900;letter-spacing:-.08em;box-shadow:0 0 38px color-mix(in srgb,var(--blue) 18%,transparent)}
-    .loader-hello{font-size:clamp(2.8rem,8vw,5.8rem);font-weight:800;letter-spacing:-.09em;line-height:.95}
+    .loader-hello{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;font-size:clamp(2.8rem,8vw,5.8rem);font-weight:650;letter-spacing:-.065em;line-height:.95}
     .loader-hello span{color:var(--blue)}
     .loader-caption{font:10px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
     .loader-track{width:148px;height:2px;overflow:hidden;background:var(--line);margin-top:6px}
-    .loader-track span{display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--blue),var(--mint),var(--pink));transform:scaleX(0);transform-origin:left;animation:loader-progress 2.7s .1s linear forwards}
+    .loader-track span{display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--blue),var(--mint),var(--pink));transform:scaleX(0);transform-origin:left;animation:loader-progress 1.35s .05s cubic-bezier(.22,1,.36,1) forwards}
     body.is-loading{overflow:hidden}
     body.is-loaded .site-nav,body.is-loaded main,body.is-loaded .site-footer{animation:site-arrive .7s var(--ease) both}
     body.is-loaded #hero-canvas{animation:canvas-arrive 1s ease both}
     @keyframes loader-progress{to{transform:scaleX(1)}}
     @keyframes loader-spin{to{transform:rotate(360deg)}}
-    @keyframes loader-orbit{0%,100%{transform:scale(.96);opacity:.55}50%{transform:scale(1.04);opacity:1}}
+    @keyframes loader-orbit{0%,100%{transform:scale(.97);opacity:.6}50%{transform:scale(1.02);opacity:1}}
     @keyframes loader-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     @keyframes site-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
     @keyframes canvas-arrive{from{opacity:0}to{opacity:.82}}
@@ -426,13 +426,13 @@
       setTheme(preference,false);
     })();
 
-    // Brief three-second welcome intro. Content remains in the DOM and is revealed without blocking site initialization.
+    // Brief 1.75-second welcome intro with a native iOS-inspired system font and soft motion.
     (() => {
       const loader = document.getElementById('intro-loader');
       if (!loader) { document.body.classList.remove('is-loading'); return; }
       const start = performance.now();
       const finish = () => {
-        const wait = Math.max(0,3000-(performance.now()-start));
+        const wait = Math.max(0,1750-(performance.now()-start));
         window.setTimeout(() => {
           loader.classList.add('is-done');
           document.body.classList.remove('is-loading');
