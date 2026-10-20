@@ -15,6 +15,27 @@
   <style>
     :root{color-scheme:light dark;--bg:#0b0d17;--paper:#111421;--ink:#f4f5ff;--muted:#a2a8c0;--blue:#b49aff;--blue-soft:#302341;--line:#302a43;--mint:#78f0d0;--pink:#ff7aa8;--cyan:#73e4ff;--mono:"DM Mono",monospace;--sans:"Inter",sans-serif;--pad:clamp(22px,5.5vw,88px);--ease:cubic-bezier(.2,.75,.25,1)}
     @media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f8f6ff;--paper:#ffffff;--ink:#20172f;--muted:#70677f;--blue:#7250e8;--blue-soft:#eee7ff;--line:#e4dced;--mint:#087f72;--pink:#d83f7d;--cyan:#087da5}}
+    .intro-loader{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:24px;background:var(--bg);color:var(--ink);opacity:1;visibility:visible;transition:opacity .65s var(--ease),visibility .65s;overflow:hidden}
+    .intro-loader:before{content:"";position:absolute;width:min(78vw,620px);aspect-ratio:1;border:1px solid color-mix(in srgb,var(--blue) 28%,transparent);border-radius:50%;box-shadow:inset 0 0 90px color-mix(in srgb,var(--blue) 7%,transparent),0 0 110px color-mix(in srgb,var(--blue) 10%,transparent);animation:loader-orbit 3s ease-in-out infinite}
+    .intro-loader:after{content:"";position:absolute;width:min(52vw,390px);aspect-ratio:1;border:1px dashed color-mix(in srgb,var(--mint) 28%,transparent);border-radius:50%;animation:loader-spin 12s linear infinite}
+    .intro-loader.is-done{opacity:0;visibility:hidden;pointer-events:none}
+    .loader-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;animation:loader-rise .8s var(--ease) both}
+    .loader-mark{display:grid;place-items:center;width:54px;height:54px;border:1px solid color-mix(in srgb,var(--blue) 55%,transparent);border-radius:18px;color:var(--blue);font-size:15px;font-weight:900;letter-spacing:-.08em;box-shadow:0 0 38px color-mix(in srgb,var(--blue) 18%,transparent)}
+    .loader-hello{font-size:clamp(2.8rem,8vw,5.8rem);font-weight:800;letter-spacing:-.09em;line-height:.95}
+    .loader-hello span{color:var(--blue)}
+    .loader-caption{font:10px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+    .loader-track{width:148px;height:2px;overflow:hidden;background:var(--line);margin-top:6px}
+    .loader-track span{display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--blue),var(--mint),var(--pink));transform:scaleX(0);transform-origin:left;animation:loader-progress 2.7s .1s linear forwards}
+    body.is-loading{overflow:hidden}
+    body.is-loaded .site-nav,body.is-loaded main,body.is-loaded .site-footer{animation:site-arrive .7s var(--ease) both}
+    body.is-loaded #hero-canvas{animation:canvas-arrive 1s ease both}
+    @keyframes loader-progress{to{transform:scaleX(1)}}
+    @keyframes loader-spin{to{transform:rotate(360deg)}}
+    @keyframes loader-orbit{0%,100%{transform:scale(.96);opacity:.55}50%{transform:scale(1.04);opacity:1}}
+    @keyframes loader-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes site-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes canvas-arrive{from{opacity:0}to{opacity:.82}}
+    @media(prefers-reduced-motion:reduce){.intro-loader:before,.intro-loader:after,.loader-track span{animation:none}.loader-track span{transform:scaleX(1)}.intro-loader,.loader-content,body.is-loaded .site-nav,body.is-loaded main,body.is-loaded .site-footer{transition:none;animation:none}}
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth;scroll-padding-top:90px}
     body{font-family:var(--sans);background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -208,7 +229,10 @@
     }
   </style>
 </head>
-<body>
+<body class="is-loading">
+  <div class="intro-loader" id="intro-loader" role="status" aria-live="polite" aria-label="Welcome to Zaid Khan portfolio">
+    <div class="loader-content"><div class="loader-mark" aria-hidden="true">ZK</div><p class="loader-hello">Hello<span>.</span></p><p class="loader-caption">Preparing your experience</p><div class="loader-track" aria-hidden="true"><span></span></div></div>
+  </div>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   <nav class="site-nav" aria-label="Main navigation">
     <a class="brand" href="#top" aria-label="Zaid Khan home"><span class="brand-mark">ZK</span><span>ZAID KHAN</span></a>
@@ -400,6 +424,24 @@
       toggle.addEventListener('click',()=>setTheme(preference==='system'?'dark':preference==='dark'?'light':'system'));
       systemScheme.addEventListener('change',()=>{if(preference==='system') setTheme('system',false);});
       setTheme(preference,false);
+    })();
+
+    // Brief three-second welcome intro. Content remains in the DOM and is revealed without blocking site initialization.
+    (() => {
+      const loader = document.getElementById('intro-loader');
+      if (!loader) { document.body.classList.remove('is-loading'); return; }
+      const start = performance.now();
+      const finish = () => {
+        const wait = Math.max(0,3000-(performance.now()-start));
+        window.setTimeout(() => {
+          loader.classList.add('is-done');
+          document.body.classList.remove('is-loading');
+          document.body.classList.add('is-loaded');
+          window.setTimeout(() => loader.remove(),700);
+        },wait);
+      };
+      if (document.readyState === 'complete') finish();
+      else window.addEventListener('load',finish,{once:true});
     })();
 
     document.getElementById('year').textContent = new Date().getFullYear();
