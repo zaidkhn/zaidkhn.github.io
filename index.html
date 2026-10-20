@@ -356,6 +356,76 @@
       .project h3 { font-size: 16px; }
     }
   </style>
+
+  <style>
+    /* Immersive editorial portfolio inspired by the reference, tailored for Zaid */
+    :root { --bg-page:#f9f8ff; --bg-card:#fff; --bg-card-alt:#edf0ff; --border-color:#d8dcf0; --highlight:#d9e6ff; --text-main:#08080a; --text-muted:#555565; --text-faint:#7a7b8c; --accent:#233eff; --radius:22px; --pad:clamp(22px,3vw,42px); }
+    body { background:var(--bg-page); }
+    body::before { background-image:radial-gradient(#cdd3ed .7px,transparent .7px); background-size:18px 18px; opacity:.45; }
+    .bento-container { max-width:1400px; }
+    .header-card { border-radius:999px; background:rgba(249,248,255,.85); border-color:rgba(35,62,255,.18); box-shadow:0 15px 45px rgba(25,28,65,.05); }
+    .brand-icon { background:#08080a; border-radius:50%; }
+    .status-pill { color:#233eff; background:#eef1ff; border-color:#d9e0ff; }
+    .dot { background:#233eff; }
+    .hero-text { min-height:440px; background:#f0f1ff; border-color:#dfe2ff; }
+    .hero-text h1 { max-width:850px; font-size:clamp(3rem,7vw,6.9rem); line-height:.94; letter-spacing:-.075em; }
+    .hero-text p { max-width:620px; font-size:clamp(1rem,1.5vw,1.18rem); }
+    .hero-image { min-height:440px; background:#dfe5ff; border-color:#dfe5ff; }
+    .hero-image .img-wrapper { min-height:400px; background:#e4e8ff; }
+    .hero-image img { filter:saturate(.84); }
+    .location-tag { color:#161620; border:1px solid rgba(35,62,255,.18); background:rgba(249,248,255,.84); }
+    .tagline { letter-spacing:.17em; font-size:11px; }
+    .btn-primary { background:#08080a; border-color:#08080a; }
+    .btn-primary:hover { background:#233eff; border-color:#233eff; }
+    .btn-secondary:hover { background:#d9e6ff; border-color:#b8c8ff; }
+    .card { box-shadow:0 8px 30px rgba(25,28,65,.035); }
+    .card:hover { transform:translateY(-3px); box-shadow:0 18px 45px rgba(25,28,65,.09); }
+    .card-alt { background:#f1f2ff; }
+    .chip { border-color:#dde1f8; background:#f8f8ff; }
+    .chip:hover { background:#d9e6ff; border-color:#b8c8ff; }
+    .section-title { margin-top:clamp(48px,8vw,100px); font-size:clamp(1rem,1.5vw,1.25rem); letter-spacing:.12em; }
+    .project { min-height:290px; border-color:#dfe2f3; }
+    .project-icon { background:#f0f2ff; border-color:#dfe2f3; color:#233eff; }
+    .project-tags span { background:#edf0ff; color:#21265c; }
+    .timeline-item { border-left-color:#e1e4f5; }
+    .timeline-item::before { border-color:#233eff; }
+    .contact-main { background:#08080a; border-color:#08080a; }
+    .contact-main .tagline { color:#b8c5ff; }
+    .contact-main .btn-primary { background:#f9f8ff; border-color:#f9f8ff; color:#08080a; }
+    .contact-main .btn-primary:hover { background:#d9e6ff; border-color:#d9e6ff; }
+    .detail-box:hover { background:#e9edff; border-color:#c6d0ff; }
+    .detail-box i { color:#233eff; }
+    .footer { padding-top:46px; }
+    .hero-text::after { content:"ZK"; position:absolute; right:24px; bottom:-.22em; font-size:clamp(7rem,19vw,17rem); line-height:1; letter-spacing:-.1em; font-weight:800; color:rgba(35,62,255,.045); pointer-events:none; }
+    .hero-text > * { position:relative; z-index:1; }
+    .hero-text::after { z-index:0; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1); }
+    .reveal.is-visible { opacity:1; transform:translateY(0); }
+    .project:nth-of-type(3n+1) { transition-delay:.04s; }
+    .project:nth-of-type(3n+2) { transition-delay:.1s; }
+    .project:nth-of-type(3n) { transition-delay:.16s; }
+    @media (max-width:1024px) {
+      .hero-text h1 { font-size:clamp(3.1rem,7.5vw,5.8rem); }
+      .hero-text,.hero-image { min-height:390px; }
+      .hero-image .img-wrapper { min-height:350px; }
+    }
+    @media (max-width:768px) {
+      body { padding:10px; }
+      .header-card { border-radius:18px; }
+      .hero-text { min-height:360px; text-align:left; align-items:flex-start; }
+      .hero-text h1 { font-size:clamp(3rem,12vw,5rem); }
+      .hero-text p { font-size:1rem; }
+      .hero-image { min-height:340px; }
+      .hero-image .img-wrapper { min-height:300px; }
+      .btn-group { justify-content:flex-start; }
+      .btn { width:auto; }
+      .section-title { margin-top:38px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
 </head>
 
 <body>
@@ -566,6 +636,29 @@
   </footer>
 
 </div>
+
+
+<script>
+  // Reveal sections as they enter the viewport; gracefully falls back to static content.
+  document.addEventListener('DOMContentLoaded', function () {
+    const selectors = '.about, .stack, .section-title, .project, .timeline-card, .contact-main, .contact-details';
+    const items = document.querySelectorAll(selectors);
+    items.forEach((item) => item.classList.add('reveal'));
+    if (!('IntersectionObserver' in window)) {
+      items.forEach((item) => item.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    items.forEach((item) => observer.observe(item));
+  });
+</script>
 
 </body>
 </html>
